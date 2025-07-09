@@ -3,7 +3,7 @@ import time
 favorites = {'color': 'blue', 'food': 'mac and cheese', 'place': 'grand canyon'}
 
 while True:
-    print(f"Your favorite categories are: {', '.join(favorites.keys())}") # ', ' makes them into one string. ChatGPT help
+    print(f"Your favorite categories are: {', '.join(favorites.keys())}") # ', ' puts into one string. ChatGPT help
     view_category = input("Which category would you like to see? ")
     if view_category in favorites.keys():
         if view_category.lower().strip() == 'place':

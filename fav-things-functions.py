@@ -3,13 +3,14 @@ import time
 favorites = {'color': 'blue', 'food': 'mac and cheese', 'place': 'grand canyon'}
 
 # ChatGPT helped me a lot with functions :)
+# ChatGPT recommended to remove .keys() for simplicity
 def clean_input(prompt_message):
     return input(prompt_message).lower().strip() # from ChatGPT. cleanup purposes
 
 def lookup_favorite(favorites):
     while True:
         view_category = clean_input("\nWhich category would you like to see? ")   
-        if view_category in favorites.keys():
+        if view_category in favorites:
             if view_category == 'place':
                 print(f"My favorite {view_category} is {favorites[view_category].title()}!") 
                 time.sleep(1)
@@ -21,14 +22,13 @@ def lookup_favorite(favorites):
             continue
         break
 
-def add_favorite(favorites): # from ChatGPT
-    while True:
-        add_category = clean_input("What category would you like to add? ")
-        add_value = clean_input(f"What is your favorite {add_category}? ")
-        favorites[add_category] = add_value
-        print("Category added!")
-        time.sleep(1)
-        return favorites # this updates
+def add_favorite(favorites): # from ChatGPT. while True deleted
+    add_category = clean_input("What category would you like to add? ")
+    add_value = clean_input(f"What is your favorite {add_category}? ")
+    favorites[add_category] = add_value
+    print("Category added!")
+    time.sleep(1)
+    return favorites # this updates the dictionary
 
 def display_favorite(favorites):
     print("\nHere are all your favorites:")
@@ -39,7 +39,7 @@ def display_favorite(favorites):
 def update_favorite(favorites):
     while True:
         user_update = clean_input("\nWhat category would you like to update: ")
-        if user_update in favorites.keys():
+        if user_update in favorites:
             user_update_favorite = clean_input(f"What is your favorite {user_update}? ")
             favorites[user_update] = user_update_favorite
             print(f"Your favorite {user_update} is now {user_update_favorite}!")
@@ -52,7 +52,7 @@ def update_favorite(favorites):
 def del_favorite(favorites):
     while True:
         user_del = clean_input("\nWhat category would you like to delete?")
-        if user_del in favorites.keys():
+        if user_del in favorites:
             del favorites[user_del]
             print("Category deleted!")
             time.sleep(1)
@@ -62,12 +62,12 @@ def del_favorite(favorites):
             continue
             
 
-print(f"Available categories: {', '.join(favorites.keys())}") # ', ' makes them into one string. ChatGPT help
+print(f"Available categories: {', '.join(favorites)}") # ', ' makes them into one string. ChatGPT help
 
 while True:
     action = clean_input("\n\nWhat would you like to do? (lookup/add/update/display/delete/quit) ")
     if action == 'lookup':
-        lookup_favorite(favorites)       
+        lookup_favorite(favorites)      
     elif action == 'add': # ChatGPT
         result = add_favorite(favorites)
         if result is not None:
@@ -85,4 +85,3 @@ while True:
         break
     else:
         print("Invalid option. Try again.")
-
